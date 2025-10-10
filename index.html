@@ -57,6 +57,7 @@
   <style>
     html {
         background-color: #0A0A0A;
+        scroll-behavior: smooth;
     }
     body {
         background-color: transparent;
@@ -116,6 +117,64 @@
     }
     .page-container-animate {
         animation: page-fade-in-up 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+    }
+
+    /* Skeleton Shimmer Animation */
+    @keyframes shimmer {
+        100% {
+            transform: translateX(100%);
+        }
+    }
+    .skeleton-shimmer::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+        animation: shimmer 1.5s infinite;
+    }
+    
+    /* Landing Page Animations */
+    @keyframes section-fade-in {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-section-fade-in {
+        animation: section-fade-in 0.7s ease-out forwards;
+    }
+    
+    .cta-glow-button {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        border: 1px solid rgba(159, 0, 255, 0.5);
+    }
+    .cta-glow-button::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        width: 200%;
+        padding-bottom: 200%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(159, 0, 255, 0.5) 0%, rgba(159, 0, 255, 0) 60%);
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.5s ease;
+    }
+    .cta-glow-button:hover::before {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+    .animate-ticker-scroll {
+        animation: ticker-scroll 40s linear infinite;
     }
   </style>
 </head>

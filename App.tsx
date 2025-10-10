@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Sidebar from './components/Sidebar.tsx';
 import MobileHeader from './components/MobileHeader.tsx';
@@ -12,8 +12,9 @@ import { ToastProvider } from './components/ToastProvider.tsx';
 import BottomNavBar from './components/BottomNavBar.tsx';
 import { PortfolioProvider } from './contexts/PortfolioContext.tsx';
 import Guide from './components/Guide.tsx';
+import Landing from './pages/Landing.tsx';
 
-const AppContent: React.FC = () => {
+const MainApp: React.FC = () => {
   const location = useLocation();
   return (
     <div className="flex h-screen bg-transparent text-gray-300">
@@ -45,11 +46,17 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  if (!isAuthenticated) {
+    return <Landing onLaunch={() => setIsAuthenticated(true)} />;
+  }
+
   return (
     <ToastProvider>
       <PortfolioProvider>
         <HashRouter>
-          <AppContent />
+          <MainApp />
         </HashRouter>
       </PortfolioProvider>
     </ToastProvider>

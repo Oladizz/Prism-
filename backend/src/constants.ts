@@ -1,0 +1,15 @@
+export const tokenSymbolToCoinGeckoId: { [key: string]: string } = {
+    'ETH': 'ethereum',
+    'WETH': 'weth',
+    'USDT': 'tether',
+    'USDC': 'usd-coin',
+    'DAI': 'dai',
+    'BNB': 'binancecoin',
+    'MATIC': 'polygon',
+    'AVAX': 'avalanche-2',
+    'OP': 'optimism',
+    'ARB': 'arbitrum',
+    'SOL': 'solana',
+    'BTC': 'bitcoin',
+    'TON': 'the-open-network',
+};

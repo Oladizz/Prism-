@@ -1,22 +1,23 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
-const uri: string = process.env.MONGODB_URI || '';
-
-if (!uri) {
-  console.error('MONGODB_URI environment variable is not set.');
-  process.exit(1);
-}
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+let client: MongoClient;
 
 async function connectToMongoDB() {
+  const uri: string = process.env.MONGODB_URI || '';
+
+  if (!uri) {
+    throw new Error('MONGODB_URI environment variable is not set.');
+  }
+
+  // Create a MongoClient with a MongoClientOptions object to set the Stable API version
+  client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  });
+
   try {
     // Connect the client to the server (optional starting in v4.7)
     await client.connect();
@@ -26,7 +27,7 @@ async function connectToMongoDB() {
     return client.db(); // Return the default database instance
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
-    process.exit(1);
+    throw error;
   }
 }
 

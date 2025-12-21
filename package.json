@@ -4,9 +4,10 @@
   "description": "",
   "main": "backend/src/index.ts",
   "scripts": {
-    "start": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\"",
-    "dev:frontend": "cd frontend && yarn dev",
-    "dev:backend": "cd backend && yarn start",
+    "start": "concurrently \"npm run dev:backend\" \"npm run start:frontend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "start:frontend": "cd frontend && npm start",
+    "dev:backend": "cd backend && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +22,7 @@
     "url": "https://github.com/Oladizz/Prism-/issues"
   },
   "homepage": "https://github.com/Oladizz/Prism-#readme",
-  "devDependencies": {
+  "dependencies": {
     "concurrently": "^9.2.1"
   }
 }

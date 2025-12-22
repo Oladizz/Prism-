@@ -3,6 +3,7 @@ services:
     name: prism
     env: node
     buildCommand: |
-      cd frontend && npm install --include=dev && npm run build
-      cd backend && npm install
-    startCommand: cd backend && npx ts-node src/index.ts
+      npm install
+      cd frontend && npm install && npm run build
+      cd ../backend && npm install
+    startCommand: cd backend && npx ts-node -r tsconfig-paths/register src/index.ts

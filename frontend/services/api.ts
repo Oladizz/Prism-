@@ -3,7 +3,7 @@ import { generateSparkline, COINGECKO_IDS } from '../constants';
 import { BitcoinIcon, EthereumIcon, SolanaIcon, BnbIcon, ToncoinIcon, PolygonIcon, BaseIcon, AvalancheIcon, OptimismIcon, ArbitrumIcon } from '../components/icons/CryptoIcons';
 import { saveToCache, loadFromCache, invalidateCache } from '../utils/cache'; // Import caching utilities
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
 
 const getApiUrl = (chain: string): string => {
     return `${BASE_URL}/${chain}`;

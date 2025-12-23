@@ -1,9 +1,19 @@
+# This file is used to deploy the backend service to Render using Docker.
 services:
   - type: web
-    name: prism
-    env: node
-    buildCommand: |
-      npm install
-      cd frontend && npm install && npm run build
-      cd ../backend && npm install
-    startCommand: cd backend && npx ts-node -r tsconfig-paths/register src/index.ts
+    name: prism-backend
+    env: docker # Specify the environment as 'docker'
+    # Render will automatically use the Dockerfile in the root directory
+    # Health check path (optional, but recommended)
+    healthCheckPath: /health # You would need to implement a /health endpoint in your backend
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Add other environment variables like database URLs, API keys, etc.
+      # These should be configured as secrets in the Render dashboard.
+      # Example:
+      # - key: DATABASE_URL
+      #   fromSecret: PRISM_DATABASE_URL
+      # - key: FIREBASE_API_KEY
+      #   fromSecret: PRISM_FIREBASE_API_KEY
+
